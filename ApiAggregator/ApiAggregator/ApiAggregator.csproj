@@ -15,6 +15,8 @@
 
   <ItemGroup>
     <ProjectReference Include="..\ApiAggregator.ServiceDefaults\ApiAggregator.ServiceDefaults.csproj" />
+    <ProjectReference Include="..\Application\Application.csproj" />
+    <ProjectReference Include="..\Common\Common.csproj" />
     <ProjectReference Include="..\Gateway\Gateway.csproj" />
   </ItemGroup>
 

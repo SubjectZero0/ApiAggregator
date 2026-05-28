@@ -1,5 +1,4 @@
 using ApiAggregator;
-using Gateway;
 
 var builder = WebApplication
 	.CreateBuilder(args)
