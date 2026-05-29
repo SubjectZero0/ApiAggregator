@@ -1,4 +1,6 @@
-﻿namespace Application.Models.Finance
+﻿using System.Text.Json.Serialization;
+
+namespace Application.Models.Finance
 {
 	public class GetMarketSummaryQuery
 	{
@@ -62,6 +64,7 @@
 		}
 	}
 
+	[JsonConverter(typeof(JsonStringEnumConverter))]
 	public enum FieldOrdering
 	{
 		Ascending,
@@ -69,6 +72,7 @@
 		None
 	}
 
+	[JsonConverter(typeof(JsonStringEnumConverter))]
 	public enum FieldToSort
 	{
 		HighestPrice,

@@ -16,7 +16,7 @@ namespace Application.Models
 
 		public bool IsOrderedByDate { get; init; }
 
-		public OrderingOptions OrderingOptions { get; init; }
+		public OrderingOptions MarketOrderingOptions { get; init; }
 
 		public int NumberOfMarkets { get; init; }
 
@@ -25,17 +25,17 @@ namespace Application.Models
 			CityName = string.Empty;
 			CountryCode = string.Empty;
 			NewsCategory = string.Empty;
-			OrderingOptions = new OrderingOptions();
+			MarketOrderingOptions = new OrderingOptions();
 		}
 
-		public GetDashBoardQuery(string cityName, string countryCode, string newsCategory, int newsPageSize, bool isOrderedByDate, OrderingOptions orderingOptions, int numberOfMarkets)
+		public GetDashBoardQuery(string cityName, string countryCode, string newsCategory, int newsPageSize, bool isOrderedByDate, OrderingOptions marketOrderingOptions, int numberOfMarkets)
 		{
 			CityName = cityName;
 			CountryCode = countryCode;
 			NewsCategory = newsCategory;
 			NewsPageSize = newsPageSize;
 			IsOrderedByDate = isOrderedByDate;
-			OrderingOptions = orderingOptions;
+			MarketOrderingOptions = marketOrderingOptions;
 			NumberOfMarkets = numberOfMarkets;
 		}
 	}
