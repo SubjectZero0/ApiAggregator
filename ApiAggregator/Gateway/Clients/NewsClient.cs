@@ -1,4 +1,5 @@
 ﻿using ApiAggregator.Configurations;
+using Application.Models.News;
 using Gateway.Models;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
@@ -9,7 +10,7 @@ namespace Gateway.Clients
 {
 	public interface INewsClient
 	{
-		Task<NewsHeadlines?> GetTopHeadlines();
+		Task<NewsHeadlines?> GetTopHeadlines(GetTopHeadlinesQuery query);
 	}
 
 	internal class NewsClient : INewsClient
@@ -18,6 +19,8 @@ namespace Gateway.Clients
 		private readonly NewsApiConfiguration _newsCfg;
 		private readonly JsonSerializerOptions _serializerOptions;
 		private readonly ILogger<NewsClient> _logger;
+
+		private const int _maxPageSize = 100;
 
 		public NewsClient(HttpClient httpClient, IOptions<NewsApiConfiguration> newsOptions, ILogger<NewsClient> logger)
 		{
@@ -35,9 +38,11 @@ namespace Gateway.Clients
 			_logger = logger;
 		}
 
-		public async Task<NewsHeadlines?> GetTopHeadlines()
+		public async Task<NewsHeadlines?> GetTopHeadlines(GetTopHeadlinesQuery query)
 		{
-			var url = _newsCfg.BaseUrl + $"top-headlines?country=us&category=business&apiKey={_newsCfg.ApiKey}";
+			var pagesize = query.PageSize <= _maxPageSize ? query.PageSize : _maxPageSize;
+
+			var url = _newsCfg.BaseUrl + $"top-headlines?country=us&category={query.Category.ToLower()}&pagesize={pagesize}&apiKey={_newsCfg.ApiKey}";
 
 			try
 			{

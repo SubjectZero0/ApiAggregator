@@ -1,4 +1,4 @@
-﻿namespace Application.Utils.Mappers
+﻿namespace Gateway.Utils.Mappers
 {
 	internal interface IMapper<in TInput, out TOutput> where TInput : class where TOutput : class
 	{

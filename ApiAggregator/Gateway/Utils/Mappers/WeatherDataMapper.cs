@@ -1,9 +1,9 @@
 ﻿using Application.Models.Weather;
 using Gateway.Models;
 
-namespace Application.Utils.Mappers
+namespace Gateway.Utils.Mappers
 {
-	internal class GetCurrentWeatherDataMapper : IMapper<CurrentWeatherData, CurrentWeatherResponse>
+	internal class WeatherDataMapper : IMapper<CurrentWeatherData, CurrentWeatherResponse>
 	{
 		public CurrentWeatherResponse Map(CurrentWeatherData input)
 		{

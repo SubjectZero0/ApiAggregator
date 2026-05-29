@@ -46,8 +46,5 @@ namespace Gateway.Models
 
 		[JsonPropertyName("vw")]
 		public double? VolumeWeightedAveragePrice { get; set; }
-
-		//[JsonPropertyName("t")]
-		//public long TimestampUnix { get; set; }
 	}
 }

@@ -1,7 +1,22 @@
 ﻿namespace Application.Models.Weather
 {
-	public record GetCurrentWeatherQuery(string CityName, string CountryCode)
+	public class GetCurrentWeatherQuery
 	{
+		public string CityName { get; }
+
+		public string CountryCode { get; }
+
+		public GetCurrentWeatherQuery()
+		{
+			CityName = string.Empty;
+			CountryCode = string.Empty;
+		}
+
+		public GetCurrentWeatherQuery(string cityName, string countryCode)
+		{
+			CityName = cityName;
+			CountryCode = countryCode;
+		}
 	}
 
 	public class CurrentWeatherResponse

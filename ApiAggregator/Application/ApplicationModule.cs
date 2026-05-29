@@ -7,8 +7,7 @@ namespace Application
 		public static IServiceCollection AddApplicationModule(this IServiceCollection services)
 		{
 			return services
-				.AddServices()
-				.AddUtils();
+				.AddServices();
 		}
 	}
 }

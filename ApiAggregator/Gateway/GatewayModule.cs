@@ -9,7 +9,9 @@ namespace Gateway
 		{
 			return services
 				.AddGatewayConfigurations(configuration)
-				.AddClients();
+				.AddProviders()
+				.AddClients()
+				.AddUtils();
 		}
 	}
 }

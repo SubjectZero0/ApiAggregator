@@ -1,5 +1,5 @@
-﻿using Application.Models.Weather;
-using Application.Services.Dashboard.Weather;
+﻿using Application.Models;
+using Application.Services.Dashboard;
 using Microsoft.AspNetCore.Mvc;
 
 namespace ApiAggregator.Controllers
@@ -8,18 +8,18 @@ namespace ApiAggregator.Controllers
 	[Route("api/[controller]")]
 	public class DashboardController : ControllerBase
 	{
-		private readonly IGetCurrentWeatherService _weatherService;
+		private readonly IDashBoardService _dashboardService;
 
-		public DashboardController(IGetCurrentWeatherService weatherService)
+		public DashboardController(IDashBoardService dashboardService)
 		{
-			_weatherService = weatherService;
+			_dashboardService = dashboardService;
 		}
 
 		[HttpGet]
-		[Route("/geocoding")]
-		public async Task<ActionResult> GetGeocoding([FromQuery] GetCurrentWeatherQuery query)
+		[Route("/dashboard")]
+		public async Task<ActionResult> GetDashboard([FromQuery] GetDashBoardQuery query)
 		{
-			var result = await _weatherService.Get(query);
+			var result = await _dashboardService.GetDashBoard(query);
 
 			return Ok(result);
 		}
