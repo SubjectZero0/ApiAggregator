@@ -1,5 +1,6 @@
 ﻿using Application;
 using Gateway;
+using Infrastructure;
 
 namespace ApiAggregator
 {
@@ -8,7 +9,8 @@ namespace ApiAggregator
 		public static WebApplicationBuilder AddModules(this WebApplicationBuilder builder)
 		{
 			builder.Services.AddGatewayModule(builder.Configuration);
-			builder.Services.AddApplicationModule();
+			builder.Services.AddApplicationModule(builder.Configuration);
+			builder.Services.AddInfrastructureModule();
 
 			return builder;
 		}
