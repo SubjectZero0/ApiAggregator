@@ -3,7 +3,6 @@ using Gateway.Models;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using System.Globalization;
-using System.Net.Http.Json;
 using System.Text.Json;
 
 namespace Gateway.Clients
@@ -44,9 +43,13 @@ namespace Gateway.Clients
 
 			try
 			{
-				var result = await _httpClient.GetFromJsonAsync<DailyMakretSummary?>(url, _serializerOptions);
+				var response = await _httpClient.GetAsync(url, HttpCompletionOption.ResponseHeadersRead);
 
-				return result;
+				response.EnsureSuccessStatusCode();
+
+				using var stream = await response.Content.ReadAsStreamAsync();
+
+				return await JsonSerializer.DeserializeAsync<DailyMakretSummary>(stream, _serializerOptions);
 			}
 			catch (Exception ex)
 			{
