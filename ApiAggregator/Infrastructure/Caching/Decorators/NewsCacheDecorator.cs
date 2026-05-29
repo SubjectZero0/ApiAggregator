@@ -31,7 +31,7 @@ namespace Infrastructure.Caching.Decorators
 
 		private string GetCacheKey(GetTopHeadlinesQuery query)
 		{
-			return _newsCacheKeyBase + "-" + $"{query.Category}-{query.PageSize}";
+			return _newsCacheKeyBase + "_" + $"{query.Category}_{query.PageSize}";
 		}
 	}
 }

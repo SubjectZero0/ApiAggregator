@@ -1,5 +1,5 @@
 ﻿using Application.Caching;
-using Infrastructure.Caching.MemoryCache;
+using Infrastructure.Caching.HybridCacheProvider;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace Infrastructure
@@ -8,8 +8,8 @@ namespace Infrastructure
 	{
 		public static IServiceCollection AddCachingProviders(this IServiceCollection services)
 		{
-			services.AddMemoryCache();
-			services.AddSingleton<ICachingProvider, MemoryCachingProvider>();
+			services.AddHybridCache();
+			services.AddSingleton<ICachingProvider, HybridCacheProvider>();
 
 			return services;
 		}

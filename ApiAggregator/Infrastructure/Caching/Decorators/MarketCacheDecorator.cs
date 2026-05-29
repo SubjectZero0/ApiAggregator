@@ -31,7 +31,7 @@ namespace Infrastructure.Caching.Decorators
 
 		private string GetCacheKey(GetMarketSummaryQuery query)
 		{
-			return _marketCacheKeyBase + "-" + $"{query.NumberOfMarkets}-{query.OrderingOptions.FieldToSort}-{query.OrderingOptions.FieldOrdering}";
+			return _marketCacheKeyBase + "_" + $"{query.NumberOfMarkets}_{query.OrderingOptions.FieldToSort}_{query.OrderingOptions.FieldOrdering}";
 		}
 	}
 }

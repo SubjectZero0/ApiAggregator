@@ -31,7 +31,7 @@ namespace Infrastructure.Caching.Decorators
 
 		private string GetCacheKey(GetCurrentWeatherQuery query)
 		{
-			return _weatherCacheKeyBase + "-" + $"{query.CityName}-{query.CountryCode}";
+			return _weatherCacheKeyBase + "_" + $"{query.CityName}_{query.CountryCode}";
 		}
 	}
 }
