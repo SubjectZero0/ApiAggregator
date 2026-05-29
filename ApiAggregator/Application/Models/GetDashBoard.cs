@@ -1,23 +1,28 @@
 ﻿using Application.Models.Finance;
 using Application.Models.News;
 using Application.Models.Weather;
+using System.ComponentModel.DataAnnotations;
 
 namespace Application.Models
 {
 	public class GetDashBoardQuery
 	{
+		[MaxLength(100, ErrorMessage = "City name is too long.")]
 		public string CityName { get; init; }
 
+		[MaxLength(2, ErrorMessage = "Country code is too long.")]
 		public string CountryCode { get; init; }
 
 		public string NewsCategory { get; init; }
 
+		[Range(0, 50, ErrorMessage = "Number of articles must be between 0 and 50.")]
 		public int NewsPageSize { get; init; }
 
 		public bool IsOrderedByDate { get; init; }
 
 		public OrderingOptions MarketOrderingOptions { get; init; }
 
+		[Range(0, 100, ErrorMessage = "Number of markets must be between 0 and 100.")]
 		public int NumberOfMarkets { get; init; }
 
 		public GetDashBoardQuery()
