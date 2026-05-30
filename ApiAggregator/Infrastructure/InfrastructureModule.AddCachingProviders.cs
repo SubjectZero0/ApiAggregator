@@ -8,7 +8,11 @@ namespace Infrastructure
 	{
 		public static IServiceCollection AddCachingProviders(this IServiceCollection services)
 		{
-			services.AddHybridCache();
+			services.AddHybridCache(options =>
+			{
+				options.MaximumPayloadBytes = 10_485_760;
+			});
+
 			services.AddSingleton<IHybridCacheOptionsFactory, HybridCacheOptionsFactory>();
 			services.AddSingleton<ICachingProvider, HybridCacheProvider>();
 

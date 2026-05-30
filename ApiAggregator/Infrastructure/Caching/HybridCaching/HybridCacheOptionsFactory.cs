@@ -28,10 +28,26 @@ namespace Infrastructure.Caching.HybridCaching
 
 		public HybridCacheEntryOptions GetOptions(string cacheName)
 		{
+			if (cacheName is CacheName.DailyMarkets)
+			{
+				return new HybridCacheEntryOptions
+				{
+					Expiration = GetTimeUntilMidnight(),
+				};
+			}
+
 			if (!_cacheOptions.TryGetValue(cacheName, out var options))
 				throw new ArgumentException("Cache with name {CacheName} was not found.", cacheName);
 
 			return options;
+		}
+
+		private static TimeSpan GetTimeUntilMidnight()
+		{
+			var now = DateTime.UtcNow;
+			var midnight = now.Date.AddDays(1);
+
+			return midnight - now;
 		}
 	}
 }

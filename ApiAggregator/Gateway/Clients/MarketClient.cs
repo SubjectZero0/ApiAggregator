@@ -2,14 +2,13 @@
 using Gateway.Models;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
-using System.Globalization;
 using System.Text.Json;
 
 namespace Gateway.Clients
 {
 	public interface IMarketClient
 	{
-		Task<DailyMakretSummary?> GetDailyMarketSummary();
+		Task<DailyMakretSummary?> GetDailyMarketSummary(string date);
 	}
 
 	internal class MarketClient : IMarketClient
@@ -35,10 +34,8 @@ namespace Gateway.Clients
 			_logger = logger;
 		}
 
-		public async Task<DailyMakretSummary?> GetDailyMarketSummary()
+		public async Task<DailyMakretSummary?> GetDailyMarketSummary(string date)
 		{
-			var date = DateTime.Now.AddDays(-1).Date.ToString("yyyy-MM-dd", CultureInfo.InvariantCulture);
-
 			var url = _massiveCfg.BaseUrl + $"aggs/grouped/locale/us/market/stocks/{date}?adjusted=true&include_otc=false&apiKey={_massiveCfg.ApiKey}";
 
 			try

@@ -7,6 +7,7 @@
 			public const string Weather = "Weather";
 			public const string Finance = "Finance";
 			public const string News = "News";
+			public const string DailyMarkets = "DailyMarkets";
 		}
 	}
 }
