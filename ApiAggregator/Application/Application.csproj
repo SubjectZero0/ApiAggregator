@@ -13,4 +13,9 @@
 		<PackageReference Include="Microsoft.Extensions.Options.DataAnnotations" Version="8.0.0" />
 	</ItemGroup>
 
+	<ItemGroup>
+		<InternalsVisibleTo Include="ApplicationTests" />
+		<InternalsVisibleTo Include="DynamicProxyGenAssembly2" />
+	</ItemGroup>
+
 </Project>
