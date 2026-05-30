@@ -25,6 +25,6 @@ namespace Infrastructure.Caching.Decorators
 		}
 
 		private static string GetCacheKey(GetTopHeadlinesQuery query)
-			=> CacheName.News + "_" + $"{query.Category.Trim().ToLowerInvariant()}_{query.PageSize}";
+			=> CacheName.News + "_" + $"{query.Category}_{query.PageSize}";
 	}
 }

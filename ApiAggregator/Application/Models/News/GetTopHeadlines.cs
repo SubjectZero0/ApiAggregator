@@ -1,4 +1,4 @@
-﻿using static Common.Constants;
+﻿using System.Text.Json.Serialization;
 
 namespace Application.Models.News
 {
@@ -10,14 +10,9 @@ namespace Application.Models.News
 
 		public bool IsOrderedByDate { get; }
 
-		public GetTopHeadlinesQuery()
+		public GetTopHeadlinesQuery(NewsCategory category = NewsCategory.General, int pageSize = 20, bool isOrderedByDate = false)
 		{
-			Category = string.Empty;
-		}
-
-		public GetTopHeadlinesQuery(string category = NewsCategory.General, int pageSize = 20, bool isOrderedByDate = false)
-		{
-			Category = category;
+			Category = category.ToString().ToLowerInvariant();
 			PageSize = pageSize;
 			IsOrderedByDate = isOrderedByDate;
 		}
@@ -70,5 +65,17 @@ namespace Application.Models.News
 			PublishedAtUtc = publishedAtUtc;
 			Content = content;
 		}
+	}
+
+	[JsonConverter(typeof(JsonStringEnumConverter))]
+	public enum NewsCategory
+	{
+		Business,
+		Entertainment,
+		General,
+		Health,
+		Science,
+		Sports,
+		Technology
 	}
 }

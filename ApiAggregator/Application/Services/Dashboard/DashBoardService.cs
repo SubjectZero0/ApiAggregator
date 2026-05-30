@@ -38,7 +38,7 @@ namespace Application.Services.Dashboard
 				isOrderedByDate: query.IsOrderedByDate);
 
 			var financeQuery = new GetMarketSummaryQuery(
-				orderingOptions: query.MarketOrderingOptions,
+				orderingOptions: new OrderingOptions(fieldOrdering: query.MarketFieldOrdering, fieldToSort: query.MarketFieldToSort),
 				numberOfMarkets: query.NumberOfMarkets);
 
 			var weatherTask = _weatherService.Get(weatherQuery);

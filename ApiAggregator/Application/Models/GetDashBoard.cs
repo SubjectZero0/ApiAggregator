@@ -13,14 +13,16 @@ namespace Application.Models
 		[MaxLength(2, ErrorMessage = "Country code is too long.")]
 		public string CountryCode { get; init; }
 
-		public string NewsCategory { get; init; }
+		public NewsCategory NewsCategory { get; init; }
 
 		[Range(0, 50, ErrorMessage = "Number of articles must be between 0 and 50.")]
 		public int NewsPageSize { get; init; }
 
 		public bool IsOrderedByDate { get; init; }
 
-		public OrderingOptions MarketOrderingOptions { get; init; }
+		public FieldOrdering MarketFieldOrdering { get; init; }
+
+		public FieldToSort MarketFieldToSort { get; init; }
 
 		[Range(0, 100, ErrorMessage = "Number of markets must be between 0 and 100.")]
 		public int NumberOfMarkets { get; init; }
@@ -29,18 +31,25 @@ namespace Application.Models
 		{
 			CityName = string.Empty;
 			CountryCode = string.Empty;
-			NewsCategory = string.Empty;
-			MarketOrderingOptions = new OrderingOptions();
 		}
 
-		public GetDashBoardQuery(string cityName, string countryCode, string newsCategory, int newsPageSize, bool isOrderedByDate, OrderingOptions marketOrderingOptions, int numberOfMarkets)
+		public GetDashBoardQuery(
+			string cityName,
+			string countryCode,
+			NewsCategory newsCategory,
+			int newsPageSize,
+			bool isOrderedByDate,
+			FieldOrdering marketFieldOrdering,
+			FieldToSort marketFieldToSort,
+			int numberOfMarkets)
 		{
 			CityName = cityName;
 			CountryCode = countryCode;
 			NewsCategory = newsCategory;
 			NewsPageSize = newsPageSize;
 			IsOrderedByDate = isOrderedByDate;
-			MarketOrderingOptions = marketOrderingOptions;
+			MarketFieldOrdering = marketFieldOrdering;
+			MarketFieldToSort = marketFieldToSort;
 			NumberOfMarkets = numberOfMarkets;
 		}
 	}
