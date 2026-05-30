@@ -1,7 +1,7 @@
 ﻿using Application.Caching;
 using Microsoft.Extensions.Caching.Hybrid;
 
-namespace Infrastructure.Caching.HybridCacheProvider
+namespace Infrastructure.Caching.HybridCaching
 {
 	internal class HybridCacheProvider : ICachingProvider
 	{

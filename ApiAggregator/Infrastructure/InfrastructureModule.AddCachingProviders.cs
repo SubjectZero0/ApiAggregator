@@ -1,5 +1,5 @@
 ﻿using Application.Caching;
-using Infrastructure.Caching.HybridCacheProvider;
+using Infrastructure.Caching.HybridCaching;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace Infrastructure
