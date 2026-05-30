@@ -1,8 +1,7 @@
 ﻿using Application.Caching;
-using Application.Configurations;
 using Application.Models.Weather;
 using Application.Providers;
-using Microsoft.Extensions.Options;
+using static Common.Constants;
 
 namespace Infrastructure.Caching.Decorators
 {
@@ -10,15 +9,11 @@ namespace Infrastructure.Caching.Decorators
 	{
 		private readonly IWeatherProvider _weatherProvider;
 		private readonly ICachingProvider _cachingProvider;
-		private readonly CachingConfiguration _cacheCfg;
 
-		private const string _weatherCacheKeyBase = "weatherCache";
-
-		public WeatherCacheDecorator(IWeatherProvider weatherProvider, ICachingProvider cachingProvider, IOptions<CachingConfiguration> cacheCfg)
+		public WeatherCacheDecorator(IWeatherProvider weatherProvider, ICachingProvider cachingProvider)
 		{
 			_weatherProvider = weatherProvider;
 			_cachingProvider = cachingProvider;
-			_cacheCfg = cacheCfg.Value;
 		}
 
 		public async Task<CurrentWeatherResponse?> GetWeather(GetCurrentWeatherQuery query)
@@ -26,12 +21,10 @@ namespace Infrastructure.Caching.Decorators
 			return await _cachingProvider.GetOrSetAsync(
 				key: GetCacheKey(query),
 				factory: () => _weatherProvider.GetWeather(query),
-				expiration: _cacheCfg.WeatherExpiry);
+				cacheName: CacheName.Weather);
 		}
 
-		private string GetCacheKey(GetCurrentWeatherQuery query)
-		{
-			return _weatherCacheKeyBase + "_" + $"{query.CityName}_{query.CountryCode}";
-		}
+		private static string GetCacheKey(GetCurrentWeatherQuery query)
+			=> CacheName.Weather + "_" + $"{query.CityName.Trim().ToLowerInvariant()}_{query.CountryCode.Trim().ToLowerInvariant()}";
 	}
 }

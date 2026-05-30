@@ -1,8 +1,7 @@
 ﻿using Application.Caching;
-using Application.Configurations;
 using Application.Models.News;
 using Application.Providers;
-using Microsoft.Extensions.Options;
+using static Common.Constants;
 
 namespace Infrastructure.Caching.Decorators
 {
@@ -10,15 +9,11 @@ namespace Infrastructure.Caching.Decorators
 	{
 		private readonly INewsProvider _newsProvider;
 		private readonly ICachingProvider _cachingProvider;
-		private readonly CachingConfiguration _cacheCfg;
 
-		private const string _newsCacheKeyBase = "newsCache";
-
-		public NewsCacheDecorator(INewsProvider newsProvider, ICachingProvider cachingProvider, IOptions<CachingConfiguration> cacheCfg)
+		public NewsCacheDecorator(INewsProvider newsProvider, ICachingProvider cachingProvider)
 		{
 			_newsProvider = newsProvider;
 			_cachingProvider = cachingProvider;
-			_cacheCfg = cacheCfg.Value;
 		}
 
 		public async Task<GetTopHeadlinesResponse?> GetHeadlines(GetTopHeadlinesQuery query)
@@ -26,12 +21,10 @@ namespace Infrastructure.Caching.Decorators
 			return await _cachingProvider.GetOrSetAsync(
 				key: GetCacheKey(query),
 				factory: () => _newsProvider.GetHeadlines(query),
-				expiration: _cacheCfg.NewsExpiry);
+				cacheName: CacheName.News);
 		}
 
-		private string GetCacheKey(GetTopHeadlinesQuery query)
-		{
-			return _newsCacheKeyBase + "_" + $"{query.Category}_{query.PageSize}";
-		}
+		private static string GetCacheKey(GetTopHeadlinesQuery query)
+			=> CacheName.News + "_" + $"{query.Category.Trim().ToLowerInvariant()}_{query.PageSize}";
 	}
 }

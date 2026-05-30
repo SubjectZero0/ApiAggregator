@@ -9,6 +9,7 @@ namespace Infrastructure
 		public static IServiceCollection AddCachingProviders(this IServiceCollection services)
 		{
 			services.AddHybridCache();
+			services.AddSingleton<IHybridCacheOptionsFactory, HybridCacheOptionsFactory>();
 			services.AddSingleton<ICachingProvider, HybridCacheProvider>();
 
 			return services;

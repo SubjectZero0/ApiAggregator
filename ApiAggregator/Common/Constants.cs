@@ -12,5 +12,12 @@
 			public const string Sports = "sports";
 			public const string Technology = "technology";
 		}
+
+		public static class CacheName
+		{
+			public const string Weather = "Weather";
+			public const string Finance = "Finance";
+			public const string News = "News";
+		}
 	}
 }
