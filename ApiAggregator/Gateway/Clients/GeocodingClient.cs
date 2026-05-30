@@ -12,15 +12,15 @@ namespace Gateway.Clients
 		Task<Geocoding?> GetGeocoding(string cityName, string countryCode);
 	}
 
-	internal class GeocodingCLient : IGeocodingClient
+	internal class GeocodingClient : IGeocodingClient
 	{
 		private readonly HttpClient _httpClient;
 		private readonly GeocodingApiConfiguration _geocodingCfg;
 		private readonly JsonSerializerOptions _serializerOptions;
-		private readonly ILogger<GeocodingCLient> _logger;
+		private readonly ILogger<GeocodingClient> _logger;
 		private const int _limit = 1;
 
-		public GeocodingCLient(HttpClient httpClient, IOptions<GeocodingApiConfiguration> geocodingOptions, ILogger<GeocodingCLient> logger)
+		public GeocodingClient(HttpClient httpClient, IOptions<GeocodingApiConfiguration> geocodingOptions, ILogger<GeocodingClient> logger)
 		{
 			_httpClient = httpClient;
 			_httpClient.DefaultRequestHeaders.Add("User-Agent", "ApiAggregatorApp");

@@ -9,7 +9,7 @@ namespace Gateway
 		public static IServiceCollection AddClients(this IServiceCollection services)
 		{
 			services
-				.AddHttpClient<IGeocodingClient, GeocodingCLient>()
+				.AddHttpClient<IGeocodingClient, GeocodingClient>()
 				.AddHttpMessageHandler<OutgoingApiCallMetricsHandler>();
 
 			services
