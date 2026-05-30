@@ -9,6 +9,7 @@ namespace Application
 		{
 			return services
 				.AddConfigurations(configuration)
+				.AddMetrics()
 				.AddServices();
 		}
 	}

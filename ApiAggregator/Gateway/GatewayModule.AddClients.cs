@@ -1,4 +1,5 @@
-﻿using Gateway.Clients;
+﻿using Application.Services.Metrics;
+using Gateway.Clients;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace Gateway
@@ -7,10 +8,21 @@ namespace Gateway
 	{
 		public static IServiceCollection AddClients(this IServiceCollection services)
 		{
-			services.AddHttpClient<IGeocodingClient, GeocodingCLient>();
-			services.AddHttpClient<IWeatherClient, WeatherClient>();
-			services.AddHttpClient<IMarketClient, MarketClient>();
-			services.AddHttpClient<INewsClient, NewsClient>();
+			services
+				.AddHttpClient<IGeocodingClient, GeocodingCLient>()
+				.AddHttpMessageHandler<OutgoingApiCallMetricsHandler>();
+
+			services
+				.AddHttpClient<IWeatherClient, WeatherClient>()
+				.AddHttpMessageHandler<OutgoingApiCallMetricsHandler>();
+
+			services
+				.AddHttpClient<IMarketClient, MarketClient>()
+				.AddHttpMessageHandler<OutgoingApiCallMetricsHandler>();
+
+			services
+				.AddHttpClient<INewsClient, NewsClient>()
+				.AddHttpMessageHandler<OutgoingApiCallMetricsHandler>();
 
 			return services;
 		}

@@ -12,9 +12,5 @@
 		<PackageReference Include="Microsoft.Extensions.Options.ConfigurationExtensions" Version="8.0.0" />
 		<PackageReference Include="Microsoft.Extensions.Options.DataAnnotations" Version="8.0.0" />
 	</ItemGroup>
-	
-  <ItemGroup>
-    <ProjectReference Include="..\Common\Common.csproj" />
-  </ItemGroup>
 
 </Project>
